@@ -214,13 +214,17 @@
 		}
 	}
 	
-	// Bind the internal handlers to the appropriate DOM events.
-	// Use $.fn.delegate() to cover dynamically added matching elements
-	// and to reduce the amount of event listener overhead.
-	$(document).ready(function() {
-		var $doc = $(this);
-		
-		$doc.delegate(ELEMENT_PATTERN, 'blur', pushHandler);
-		$doc.delegate(ELEMENT_PATTERN, 'keydown', loadHandler);
+	$.extend({
+		/**
+		 * @param {String} [selector] 
+		 */
+		inputhistory: function(selector) {
+			var $document = $(document);
+			
+			selector = selector || ELEMENT_PATTERN;
+			
+			$document.on('blur', selector, pushHandler);
+			$document.on('keydown', selector, loadHandler);
+		}
 	});
 });
