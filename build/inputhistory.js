@@ -10,8 +10,22 @@
  * www.sberry.me
  * steven@sberry.me
  */
- 
-(function($) {
+(function(root, factory) {
+	if (typeof module === 'object' && module && typeof module.exports === 'object') {
+		factory.call(root, require('jquery'));
+	}
+	else if (typeof define === 'function' && define.amd) {
+		define(['jquery'], function() {
+			return factory.apply(root, arguments);
+		});
+	}
+	else if (typeof root === 'object' && root && typeof root.document === 'object') {
+		factory.call(root, root.jQuery);
+	}
+})(this, function($, undefined) {
+	var window = this;
+	var document = window.document;
+	
 	// The $.fn.delegate() matching pattern for elements that should be processed for history.
 	var ELEMENT_PATTERN = 'input.ih-enabled[type="text"]';
 	// The jQuery data attribute used to store History instances for inputs.
@@ -209,4 +223,4 @@
 		$doc.delegate(ELEMENT_PATTERN, 'blur', pushHandler);
 		$doc.delegate(ELEMENT_PATTERN, 'keydown', loadHandler);
 	});
-})(jQuery);
+});
