@@ -150,14 +150,14 @@
 	 * @param {DOMElement} obj The DOM element from which to retrieve the stored history.
 	 * @returns {History} The `History` instance associated with the DOM element.
 	 */
-	function getHistory() {
-		var history, $this = $(this);
+	function getHistory(obj) {
+		var history, $obj = $(obj);
 		
-		history = $this.data(DATA_ATTR);
+		history = $obj.data(DATA_ATTR);
 		
 		if (!(history instanceof History)) {
 			history = new History();
-			$this.data(DATA_ATTR, history);
+			$obj.data(DATA_ATTR, history);
 		}
 		
 		return history;
@@ -172,7 +172,7 @@
 	function pushHandler(e) {
 		var history, value, $this = $(this);
 		
-		history = getHistory.call(this);
+		history = getHistory(this);
 		value = $this.val();
 		
 		// Only push the history item if the length is > 0.
@@ -200,7 +200,7 @@
 			// Get the current history object.
 			// We now have an object reference, so this object
 			// can be modified directly.
-			history = getHistory.call(this);
+			history = getHistory(this);
 			value = $this.val();
 		
 			if (which === 38) { // UP arrow -> Previous history item
