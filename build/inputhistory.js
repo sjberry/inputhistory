@@ -146,7 +146,8 @@
 	 * and associated with the given input.
 	 *
 	 * @private
-	 * @returns {History} The `History` instance associated with the input or a new instance.
+	 * @param {DOMElement} obj The DOM element from which to retrieve the stored history.
+	 * @returns {History} The `History` instance associated with the DOM element.
 	 */
 	function getHistory() {
 		var history, $this = $(this);
@@ -165,7 +166,7 @@
 	 * Handles pushing new commands onto the inputs `History` object.
 	 *
 	 * @private
-	 * @param {Object} e The event object passed in by $.fn.delegate().
+	 * @param {Object} e The event object passed in by the event handler.
 	 */
 	function pushHandler(e) {
 		var history, value, $this = $(this);
@@ -186,7 +187,7 @@
 	 * Handles returning saved commands in response to UI input.
 	 *
 	 * @private
-	 * @param {Object} e The event object passed in by $.fn.delegate().
+	 * @param {Object} e The event object passed in by the event handler.
 	 */
 	function loadHandler(e) {
 		var history, value, which = e.which || e.keyCode, $this;
