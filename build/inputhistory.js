@@ -48,6 +48,7 @@
 		this._index = 0;
 		this._unrun = null;
 	}
+	
 	History.prototype = {
 		/**
 		 * Saves a value as the unrun command.
